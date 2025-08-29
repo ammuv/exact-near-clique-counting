@@ -42,7 +42,7 @@ extern double nCr[1001][401];
 
 
 void listAllCliquesDegeneracy_A(double * cliqueCounts, NeighborListArray** orderingArray, 
-                                      int size, int max_k, double *nCalls, double *sumP, double *sqP)
+                                      int size, int max_k, double *nCalls, double *sumP, double *sqP,int flag_o)
 {
     *nCalls = (*nCalls) + 1;
 
@@ -98,7 +98,7 @@ void listAllCliquesDegeneracy_A(double * cliqueCounts, NeighborListArray** order
         listAllCliquesDegeneracyRecursive_A(cliqueCounts, 
                                                   vertexSets, vertexLookup,
                                                   neighborsInP, numNeighbors,
-                                                  newBeginX, newBeginP, newBeginR, max_k, nCalls, sumP, sqP, rsize, drop); 
+                                                  newBeginX, newBeginP, newBeginR, max_k, nCalls, sumP, sqP, rsize, drop, flag_o); 
 
 
         beginR = beginR + 1;
@@ -161,7 +161,7 @@ void listAllCliquesDegeneracyRecursive_A( double * cliqueCounts,
                                                int** neighborsInP, int* numNeighbors,
                                                int beginX, int beginP, int beginR, int max_k, 
                                                double *nCalls, double *sumP, double *sqP, 
-                                               int rsize, int drop)
+                                               int rsize, int drop, int flag_o)
 {
     *nCalls = (*nCalls) + 1;
     *sumP = *sumP + (beginR - beginP);
@@ -180,13 +180,13 @@ void listAllCliquesDegeneracyRecursive_A( double * cliqueCounts,
     
     int* myCandidatesToIterateThrough;
     int numCandidatesToIterateThrough = 0;
-
+    int pivot;
     // get the candidates to add to R to make a maximal clique
-    int pivot = findBestPivotNonNeighborsDegeneracyCliques( &myCandidatesToIterateThrough,
-                                         &numCandidatesToIterateThrough,
-                                         vertexSets, vertexLookup,
-                                         neighborsInP, numNeighbors,
-                                         beginX, beginP, beginR);
+    pivot = findBestPivotNonNeighborsDegeneracyCliques( &myCandidatesToIterateThrough,
+                                                              &numCandidatesToIterateThrough,
+                                                              vertexSets, vertexLookup,
+                                                              neighborsInP, numNeighbors,
+                                                              beginX, beginP, beginR);
 
     // add candiate vertices to the partial clique one at a time and 
     // search for maximal cliques
@@ -216,12 +216,12 @@ void listAllCliquesDegeneracyRecursive_A( double * cliqueCounts,
                 listAllCliquesDegeneracyRecursive_A(cliqueCounts,
                                                       vertexSets, vertexLookup,
                                                       neighborsInP, numNeighbors,
-                                                      newBeginX, newBeginP, newBeginR, max_k, nCalls, sumP, sqP, rsize+1, drop+1);
+                                                      newBeginX, newBeginP, newBeginR, max_k, nCalls, sumP, sqP, rsize+1, drop+1, flag_o);
             else
                 listAllCliquesDegeneracyRecursive_A(cliqueCounts,
                                                       vertexSets, vertexLookup,
                                                       neighborsInP, numNeighbors,
-                                                      newBeginX, newBeginP, newBeginR, max_k, nCalls, sumP, sqP, rsize+1, drop);
+                                                      newBeginX, newBeginP, newBeginR, max_k, nCalls, sumP, sqP, rsize+1, drop, flag_o);
 
 
             moveFromRToXDegeneracyCliques( vertex, 

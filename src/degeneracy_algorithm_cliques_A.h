@@ -45,9 +45,9 @@
 void listAllCliquesDegeneracyRecursive_A(double *,
                                                int* vertexSets, int* vertexLookup,
                                                int** neighborsInP, int* numNeighbors,
-                                               int beginX, int beginP, int beginR, int max_k, double *nCalls, double *sumP, double *sqP, int rsize, int drop);
+                                               int beginX, int beginP, int beginR, int max_k, double *nCalls, double *sumP, double *sqP, int rsize, int drop, int flag_o);
 
 void listAllCliquesDegeneracy_A( double *, NeighborListArray** orderingArray,
-                                      int size, int max_k, double *nCalls, double *sumP, double *sqP );
+                                      int size, int max_k, double *nCalls, double *sumP, double *sqP,int flag_o);
 
 #endif

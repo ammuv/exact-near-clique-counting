@@ -58,7 +58,7 @@ LinkedList** readInGraphAdjListToDoubleEdges(int* n, int* m, char *fpath);
 
 void runAndPrintStatsCliques(LinkedList** adjListLinked,
                                int n, const char * gname, 
-                               char T, int max_k, int flag_d);
+                               char T, int max_k, int flag_d, int flag_o);
 
 
 int findNbrCSC(int u, int v, int *CSCindex, int *CSCedges);

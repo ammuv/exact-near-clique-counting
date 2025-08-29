@@ -65,7 +65,7 @@ for i in range(2,len(sys.argv)):   # Loop over arguments
     m = 0;
     for node in G.vertices:
         m = m + G.degrees[node]
-    m = m/2
+    m = m//2
     f_output.write(str(m)+'\n')
 
     for node in G.vertices:

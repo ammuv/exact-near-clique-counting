@@ -356,7 +356,7 @@ LinkedList** readInGraphAdjListToDoubleEdges(int* n, int* m, char *fpath)
 
 void runAndPrintStatsCliques(  LinkedList** adjListLinked,
                                int n, const char * gname, 
-                               char T, int max_k, int flag_d)
+                               char T, int max_k, int flag_d, int flag_o)
 {
   //printf("In runAndPrint function.\n");
     fflush(stderr);
@@ -405,8 +405,10 @@ void runAndPrintStatsCliques(  LinkedList** adjListLinked,
     NeighborListArray** orderingArray = computeDegeneracyOrderArray(adjListLinked, n);
     //printf("Before for. After computeDegeneracy.\n");
     fflush(stdout);
+    //printf("Degeneracy ordering:\n");
     for (int i=0; i<n; i++)
-    {
+    {   
+        //printf("%d ", orderingArray[i]->vertex);
         if (deg < orderingArray[i]->laterDegree) deg = orderingArray[i]->laterDegree;
         m += orderingArray[i]->laterDegree;
     }
@@ -421,7 +423,7 @@ void runAndPrintStatsCliques(  LinkedList** adjListLinked,
         double *sqP = (double *)Calloc(1, sizeof(double));
 
         double *cliqueCounts = (double *) Calloc((max_k)+1, sizeof(double));
-        listAllCliquesDegeneracy_A(cliqueCounts, orderingArray, n, max_k, nCalls, sumP, sqP);
+        listAllCliquesDegeneracy_A(cliqueCounts, orderingArray, n, max_k, nCalls, sumP, sqP,flag_o);
         clock_t end = clock();
        
         printf("time,nCalls,sumP,sqP,max_k,degen\n");

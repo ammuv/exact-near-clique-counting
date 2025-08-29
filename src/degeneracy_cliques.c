@@ -44,14 +44,15 @@
 int main(int argc,char** argv)
 {
 
-    if (argc != 9)
+    if (argc != 11)
     {
         printf("Incorrect number of arguments.\n");
-        printf("./degeneracy_cliques -i <file_path> -t <type> -k <max_clique_size> -d <data_flag>\n");
+        printf("./degeneracy_cliques -i <file_path> -t <type> -k <max_clique_size> -d <data_flag> -o <optimize>\n");
         printf("file_path: path to file\n");
         printf("type: A/V/E. A for just k-clique information, V for per-vertex k-cliques, E for per-edge k-cliques\n");
         printf("max_clique_size: max_clique_size. If 0, calculate for all k.\n");
         printf("data_flag: 1 if information is to be output to a file, 0 otherwise.\n");
+        printf("optimize: 1 if you want to use near clique new code or 0 for old method.\n");
         return 0;
     }
 
@@ -64,8 +65,9 @@ int main(int argc,char** argv)
     char t;
     int flag_d;
     int max_k = 0;
+    int flag_o;
 
-    while((opt = getopt(argc, argv, ":i:t:k:d:")) != -1)  
+    while((opt = getopt(argc, argv, ":i:t:k:d:o:")) != -1)  
     {  
         switch(opt)  
         {  
@@ -94,6 +96,14 @@ int main(int argc,char** argv)
                     return 0;
                 }
                 break;
+            case 'o':
+                flag_o = atoi(optarg);
+                if ((flag_o < 0) || (flag_o > 1))
+                {
+                    printf("Incorrect flag for data. Shoudld be 0 or 1\n");
+                    return 0;
+                }
+                break;
             default:
                 printf("In default case.\n");
                 abort ();
@@ -101,6 +111,7 @@ int main(int argc,char** argv)
     }
     
 
+    printf("New code.\n");
     // printf("Parsed all arguments. t = %c, max_k = %d, flag_d = %d. About to get graph.\n", t, max_k, flag_d);
     LinkedList** adjacencyList = readInGraphAdjListToDoubleEdges(&n, &m, fpath);
 
@@ -114,8 +125,8 @@ int main(int argc,char** argv)
 
 
     populate_nCr();
-  printf("about to call runAndPrint.\n");
-    runAndPrintStatsCliques(adjacencyList, n, gname, t, max_k, flag_d);
+    printf("about to call runAndPrint.\n");
+    runAndPrintStatsCliques(adjacencyList, n, gname, t, max_k, flag_d, flag_o);
 
 
     i = 0;
