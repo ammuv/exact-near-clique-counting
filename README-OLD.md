@@ -1,9 +1,31 @@
-This project is under progress. The goal is to count near cliques - cliques with few missing edges.
-
-This code is a modified version of the code of counting all cliques
+These files contain the code for the algorithm for counting all cliques
 given by Jain and Seshadhri in "The power of pivoting for exact clique counting." (WSDM 2020).
 
-Right now the original code (pivoter) can be used to calculate the number of global k-cliques, per-vertex k-cliques and per-edge k-cliques in a graph. 
+This code is a modified version of the code of quick-cliques-1.0 library for counting maximal cliques by Darren Strash (first name DOT last name AT gmail DOT com).
+
+Original author: Darren Strash (first name DOT last name AT gmail DOT com)
+
+Copyright (c) 2011 Darren Strash. This code is released under the GNU Public License (GPL) 3.0.
+
+Modifications Copyright (c) 2020 Shweta Jain
+August 16, 2019: Modified the code of quick-cliques-1.0 library to count all cliques (not just maximal).
+
+This program is free software: you can redistribute it and/or modify 
+it under the terms of the GNU General Public License as published by 
+the Free Software Foundation, either version 3 of the License, or 
+(at your option) any later version. 
+
+This program is distributed in the hope that it will be useful, 
+but WITHOUT ANY WARRANTY; without even the implied warranty of 
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+GNU General Public License for more details. 
+
+You should have received a copy of the GNU General Public License 
+along with this program.  If not, see <http://www.gnu.org/licenses/> 
+
+-------------
+
+This code can be used to calculate the number of global k-cliques, per-vertex k-cliques and per-edge k-cliques in a graph. 
 
 *Getting the graph*
 
@@ -72,3 +94,5 @@ will count the number of global k-cliques for all k and store the stats in email
 will count the number of k-cliques per edge for all k but will not store the information in any file. Instead, it will simply print the total number of k-cliques obtained from the per-edge counts.
 
 There can be some loss of precision (depending on whether storing the numbers as double is lossy) because of which for the t=V and t=E options, some values may show as non-integers. Be careful when storing the information (esp. per-edge counts) to a result file as for some graphs the result file can become very large.
+
+If you find any bugs or have any questions, please contact Shweta Jain (sjain12@ucsc.edu).
