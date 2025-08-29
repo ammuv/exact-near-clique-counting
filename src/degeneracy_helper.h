@@ -83,6 +83,10 @@ NeighborList** computeDegeneracyOrderList(LinkedList** list, int size);
 
 NeighborListArray** computeDegeneracyOrderArray(LinkedList** list, int size);
 
+NeighborListArray **computeDegeneracyOrderArrayVerticesSorted(LinkedList **list, int size);
+
 int neighborListComparator(int* nl1, int* nl2);
+
+int qsortComparator(const void *node1, const void *node2);
 
 #endif

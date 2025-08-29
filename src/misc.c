@@ -106,10 +106,10 @@ int sortComparator(int node1, int node2)
     return 0;
 }
 
-int qsortComparator(const void * node1, const void * node2)
-{
-    return ( *(int*)node1 - *(int*)node2 );
-}
+// int qsortComparator(const void * node1, const void * node2)
+// {
+//     return ( *(int*)node1 - *(int*)node2 );
+// }
 
 /*! \brief print an array of integers to standard out.
 
@@ -402,7 +402,12 @@ void runAndPrintStatsCliques(  LinkedList** adjListLinked,
     //printf("Before computeDegeneracy.\n");
     fflush(stdout);
 
-    NeighborListArray** orderingArray = computeDegeneracyOrderArray(adjListLinked, n);
+    NeighborListArray **orderingArray;
+    if (flag_o == 0) 
+        orderingArray = computeDegeneracyOrderArray(adjListLinked, n);
+    else
+        orderingArray = computeDegeneracyOrderArrayVerticesSorted(adjListLinked, n);
+
     //printf("Before for. After computeDegeneracy.\n");
     fflush(stdout);
     //printf("Degeneracy ordering:\n");
